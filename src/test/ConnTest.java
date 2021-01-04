@@ -1,4 +1,4 @@
-package conn;
+package test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ public static void main(String[]args) {
 		//con.setAutoCommit(false); 하면 자동저장안됨.
 		Statement stmt = con.createStatement();
 	String sql = "insert into song_info(si_num, si_name, si_genre, si_singer, si_creadat)";
-	sql += "values(1, '애국가','KPOP','우리모두','19401201')";
+	sql += "values(2, '애국가','KPOP','우리모두','19401201')";
 	int result = stmt.executeUpdate(sql);
 	System.out.println(result + "개 insert되었음");
 	con.commit();

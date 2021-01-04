@@ -1,28 +1,29 @@
-package conn;
+package test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ConnTest2 {
+public class TransactionTest {
+
 	public static void main(String[] args) {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
-			// 단위테스트
-			//TDD 개발방법론 테스트 드라이븐 디벨롭먼 
+			
 			e.printStackTrace();
 		}
-		Connection con;
 		try {
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", "jtest", "ezen1234");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", "jtest", "ezen1234");
+			con.setAutoCommit(false);
+			String sql = "insert into user_info";
+			sql += " values(4,'이길동','lee','lee')";
 			Statement stmt = con.createStatement();
-			String sql = "";
+			con.rollback();
+			con.commit();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 }
